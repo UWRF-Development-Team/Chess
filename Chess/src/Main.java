@@ -14,36 +14,35 @@ public class Main {
  * 1. pawn - 16
  *    - first move: forward 1 or 2
  *    - subsequent: forward 1
- *    - Capture: diagonally, by landing on piece
+ *    - Capture: diagonally, by landing on piece (can't capture forward)
  *    - Promotion to any piece (excludes King)
  *      o On condition that pawn reaches opposite side of the board
  *    - En Passent (optional)
  *      o Capture pawn on condition that opponent passes your pawn without capturing
  * 2. knight - 4
  *    - Move in L-shape (2 + 1)
- *      o Move horizontal by 2, then vertical by 1
- *      o Move vertical by 2, then horizontal by 1
- *      o Can leap over other pieces
+ *      o Move horizontal by 2, then vertical by 1 or Move vertical by 2, then horizontal by 1
+ *      o Only piece that can leap over other pieces (Castling is 1 exception for King and Rook)
  *    - Capture: by landing on piece
  * 3. bishop - 4
- *    - moves: diagonal only
- *    - can't leap over pieces
+ *    - moves: diagonal only with edge of board and other pieces being the limit
  *    - Capture: by landing on piece
  * 4. rook (castle) - 4
  *    - Move in a straight line ( left / Right / Back / Front )
  *    - Castle: If there's no pieces in between the king and rook && it's the king's and rook's first move.
+ *             REQUIRES THAT NEITHER OF THE PIECES HAVE MOVED (non-associated pieces do not affect this, the other rook can be previously moved as long as the rook being castles hasn't been moved during the game)
  *             Kingside Castle: King moves 2 spot to the right, and rook moves 2 spot to the left
  *             Queenside Castle: King moves 2 spot to the left, and rook moves 3 spot to the right
  *    - Capture by landing on piece
  * 5. queen - 2
- *    - move any number of spaces
+ *    - move any number of spaces, limited by edge of board and other pieces
  *    - Diagonal
  *    - horizontal
  *    - vertical
  * 6. king - 2
  *    -one spot in any direction
- *    -Can't move into check
- *    - Controls the win condition (checkmate, stalemate, check)
+ *    -can't move into check (some softwares make this optional, others will never allow you to move into check)
+ *    - Controls the win/lose condition (checkmate, stalemate, check)
  *    - Check: If the King is able to be captured, the player must make 1 of 3 actions:
  *      1) Move the King to a spot where it is not under attack
  *      2) Block the path of the attacking piece
