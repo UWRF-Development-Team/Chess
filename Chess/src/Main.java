@@ -61,6 +61,46 @@ public class Main {
  *  - 6. draw agreement
  *
  * Hierarchy
- * Queen <- -> ^ V / \ (Left, right, up, down, diagonal up, diagonal down)
+ * Queen <- -> ^ V / \ (Left, right, up, down, diagonal up, diagonal down) - multiple spaces - cannot jump
+ * King <- -> ^ V / \ (left, right, up, down, diagonal up, diagonal down) - one space
+ * Rook <- -> ^ V (Left, right, up, down) - multiple spaces - cannot jump (except castling)
+ * Bishop / \ (diagonal up, diagonal down) - cannot jump
+ * Knight L shape only - can jump
+ * Pawn ^ (up) ... can move diagonally when capturing
  *
+ *
+ * Methods:
+ * Lose a piece
+ * Promotion a piece
+ * Move
+ * Return a piece
+ * Select promotion from graveyard
+ * Whos turn
+ * Validate turn
+ * Switch turn
+ * is taken
+ * perform castling
+ * is blocked (castling)
+ * is check 
+ * is checkmate
+ * in bounds (on the board)
+ *
+ * Objects:
+ * Board
+ *  - Space
+ *  - Color
+ *  - Sides
+ *  - Size
+ *  - Pieces
+ * Piece (6 different)
+ *  - Graveyard
+ *  - On Board
+ *  - Side (player)
+ *  - type
+ *  - Power
+ * Players (2)
+ *  - Turn
+ *  - Time remaining
+ *  - Color
+ *  -
  */
