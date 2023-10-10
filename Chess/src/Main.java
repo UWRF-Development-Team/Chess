@@ -86,7 +86,7 @@ public class Main {
  * in bounds (on the board)
  *
  * Objects:
- * Board
+ * board.Board
  *  - Space
  *  - Color
  *  - Sides
@@ -94,7 +94,7 @@ public class Main {
  *  - Pieces
  * Piece (6 different)
  *  - Graveyard
- *  - On Board
+ *  - On board.Board
  *  - Side (player)
  *  - type
  *  - Power
