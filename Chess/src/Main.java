@@ -2,6 +2,8 @@ public class Main {
     // dad joke ai generator
     public static void main(String[] args) {
         System.out.println("Hello Dev Team!");
+
+
     }
 }
 /*
@@ -84,7 +86,7 @@ public class Main {
  * in bounds (on the board)
  *
  * Objects:
- * board.Board
+ * Board
  *  - Space
  *  - Color
  *  - Sides
@@ -92,7 +94,7 @@ public class Main {
  *  - Pieces
  * Piece (6 different)
  *  - Graveyard
- *  - On board.Board
+ *  - On Board
  *  - Side (player)
  *  - type
  *  - Power
