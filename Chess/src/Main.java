@@ -2,7 +2,7 @@ public class Main {
     // dad joke ai generator
     public static void main(String[] args) {
         System.out.println("Hello Dev Team!");
-
+        System.out.print("Randy's commit");
 
     }
 }
