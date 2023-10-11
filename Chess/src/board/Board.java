@@ -1,12 +1,12 @@
 package board;
 import java.util.ArrayList;
 public class Board {
-  //-----------------------------Class-Variables------------------------------
-         ArrayList<Space> spaces;
-         String Color;
-         int sides;
-         int size;
-         //Piece?
+    //-----------------------------Class-Variables------------------------------
+    ArrayList<Space> spaces;
+    String Color;
+    int sides;
+    int size;
+    //Piece?
 
     public int getSpace () {
         return this.Space;
