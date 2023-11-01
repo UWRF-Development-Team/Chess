@@ -1,5 +1,3 @@
-package board;
-
 public class Spot {
     String color;
     // Piece piece;
