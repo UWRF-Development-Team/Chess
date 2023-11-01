@@ -1,9 +1,11 @@
+import java.util.Optional;
+
 public class Main {
-    // dad joke ai generator
+    public static Optional<?> getOptionalSpot() {
+        return Optional.empty();
+    }
     public static void main(String[] args) {
-        System.out.println("Hello Dev Team!");
-
-
+        Optional<?> spot = getOptionalSpot();
     }
 }
 /*
@@ -73,14 +75,16 @@ public class Main {
  * Lose a piece
  * Promotion a piece
  * Move
- * Return a piece
+ * Return to the board a piece
  * Select promotion from graveyard
  * Whos turn
  * Validate turn
  * Switch turn
  * is taken
  * perform castling
- * is blocked (castling)
+ * is blocked (castling - if you have ever moved your King (not even if you moved it back later)
+ *              or the Rook you want to castle with; or if you are in check, or would be castling
+ *              across a check or into a check)
  * is check 
  * is checkmate
  * in bounds (on the board)
