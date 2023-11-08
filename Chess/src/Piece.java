@@ -4,6 +4,8 @@ public abstract class Piece {
         this.color = color;
         this.isAlive = isAlive;
     }
+    public abstract void losePiece();
+    public abstract void promotePiece();
     // Type
     // Chess pieces
         // Queen
