@@ -1,4 +1,4 @@
-public class Piece {
+public abstract class Piece {
     Piece(String pawnType, String color, boolean isAlive) {
         this.pawnType = pawnType;
         this.color = color;
