@@ -1,11 +1,11 @@
 public abstract class Piece {
-    Piece(String pawnType, String color, boolean isAlive) {
-        this.pawnType = pawnType;
-        this.color = color;
-        this.isAlive = isAlive;
+    Piece() {
+        
     }
     public abstract void losePiece();
     public abstract void promotePiece();
+    public abstract void makeMove(int rowIndex, int colIndex);
+    public abstract boolean validMove(int rowIndex, int colIndex);
     // Type
     // Chess pieces
         // Queen
@@ -15,6 +15,6 @@ public abstract class Piece {
         // Knight
         // Pawn
         //- pawn should have properties that allow promotion
-    boolean isGraveyard;
+
 }
 
