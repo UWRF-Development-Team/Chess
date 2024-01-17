@@ -1,8 +1,6 @@
 package org.falcon.v1;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Optional;
+import java.util.*;
 
 public class Board {
     char[][] board;
@@ -10,8 +8,12 @@ public class Board {
     //-------------------------------Constructor------------------------------
     public Board() {
         this.board = new char[8][8];
+        this.initializeBoard();
     }
 
+    public void initializeBoard() {
+        Arrays.stream(this.board).forEach(row -> Arrays.fill(row, ' '));
+    }
     //-------------------------------Print-org.falcon.v1.Board------------------------------
     /*
     -----------------
@@ -25,32 +27,81 @@ public class Board {
     |R|H|B|K|Q|B|H|R|
     -----------------
      */
+    //row: 0-7, col: 0-7
+    public void placeKing(int rowIndex, int colIndex) {
+        this.board[rowIndex][colIndex] = 'K';
+    }
+
+    public void placePiece(int rowIndex, int colIndex, char piece) {
+        this.board[rowIndex][colIndex] = piece;
+    }
+
+    public char choosePiece() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("""
+                Please select a number to choose the desired piece (:
+                Pawn: 0
+                Rook: 1
+                Knight(horse): 2
+                Bishop: 3
+                King: 4
+                Queen: 5
+                """);
+        boolean validInput = false;
+        int userIntChoice = 0;
+        while (!validInput) {
+            try {
+                userIntChoice = userInput.nextInt();
+                if (userIntChoice >= 0 && userIntChoice <= 5) {
+                    validInput = true;
+                } else {
+                    System.out.println("Please enter a number between 0 and 5.");
+                }
+            } catch (InputMismatchException ex) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                userInput.nextLine();
+            }
+        }
+        return switch (userIntChoice) {
+            case 0 -> 'P'; //-> returns the value
+            case 1 -> 'R';
+            case 2 -> 'H';
+            case 3 -> 'B';
+            case 4 -> 'K';
+            case 5 -> 'Q';
+            default -> throw new IllegalStateException("Unexpected value: " + userIntChoice);
+        };
+    }
     public void printBoard() {
         // Define the pieces
         final char PAWN = 'P',
-                   KING = 'K',
-                   QUEEN = 'Q',
-                   ROOK = 'R',
-                   BISHOP = 'B',
-                   HORSE = 'H',
-                   EMPTY = ' ';
+                KING = 'K',
+                QUEEN = 'Q',
+                ROOK = 'R',
+                BISHOP = 'B',
+                HORSE = 'H',
+                EMPTY = ' ';
 
         char[][] currentBoard = this.board;
         String header = "-".repeat(17);
-        System.out.println(header);
         for (int rowIndex = 0; rowIndex < 8; rowIndex++) {
             System.out.println(header);
             for (int colIndex = 0; colIndex < 8; colIndex++) {
                 if(colIndex == 0) {
                     // If we are at the start, there is a divider to the left.
-                    System.out.println("|" + currentBoard[rowIndex][colIndex] + "|");
+                    System.out.print("|" + currentBoard[rowIndex][colIndex] + "|");
                 } else {
                     //everything else has a divider to the right.
-                    System.out.print(currentBoard[rowIndex][colIndex] + " | ");
+                    System.out.print(currentBoard[rowIndex][colIndex] + "|");
+                    if(rowIndex == 7 && colIndex == 7) {
+                        System.out.println();
+                        System.out.println(header);
+                    }
                 }
             }
+            System.out.println();
         }
-        System.out.println(header);
+//        System.out.println(header);
     }
 
     //-----------------------------Class-Variables----------------------------
