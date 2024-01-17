@@ -3,11 +3,9 @@ package org.falcon.v1;
 import java.util.Optional;
 
 public class Main {
-    public static Optional<?> getOptionalSpot() {
-        return Optional.empty();
-    }
     public static void main(String[] args) {
-        Optional<?> spot = getOptionalSpot();
+        Chess chess = new Chess();
+        chess.playGame();
     }
 }
 /*
