@@ -2,9 +2,13 @@ package org.falcon.v1;
 
 import java.util.*;
 
+import static org.falcon.v1.PieceChar.*;
+
 public class Board {
     char[][] board;
-
+    final char[][] STARTING_BOARD = {
+            {ROOK.getPieceChar() }
+    }
     //-------------------------------Constructor------------------------------
     public Board() {
         this.board = new char[8][8];
