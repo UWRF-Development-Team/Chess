@@ -1,6 +1,7 @@
 package org.falcon.v1;
 
 public abstract class Piece {
+    Movement movement;
     Piece() {
         
     }
