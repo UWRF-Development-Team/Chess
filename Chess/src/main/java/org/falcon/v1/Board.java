@@ -7,12 +7,36 @@ import static org.falcon.v1.PieceChar.*;
 public class Board {
     char[][] board;
     final char[][] STARTING_BOARD = {
-            {ROOK.getPieceChar() }
-    }
+            {ROOK.getPieceChar(),HORSE.getPieceChar(),BISHOP.getPieceChar(),QUEEN.getPieceChar(),
+             KING.getPieceChar(),BISHOP.getPieceChar(),HORSE.getPieceChar(),ROOK.getPieceChar()},
+
+            {PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar(),
+             PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar()},
+
+            {EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),
+             EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar()},
+
+            {EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),
+            EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar()},
+
+            {EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),
+            EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar()},
+
+            {EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),
+            EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar()},
+
+            {PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar(),
+             PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar()},
+
+            {ROOK.getPieceChar(),HORSE.getPieceChar(),BISHOP.getPieceChar(),QUEEN.getPieceChar(),
+             KING.getPieceChar(),BISHOP.getPieceChar(),HORSE.getPieceChar(),ROOK.getPieceChar()}
+    };
+
     //-------------------------------Constructor------------------------------
     public Board() {
-        this.board = new char[8][8];
-        this.initializeBoard();
+        //Arrays.stream(this.STARTING_BOARD).forEach(row -> System.out.println((Arrays.toString(row))));
+        this.board = Arrays.copyOf(this.STARTING_BOARD, this.STARTING_BOARD.length);
+//        this.initializeBoard();
     }
 
     public void initializeBoard() {
