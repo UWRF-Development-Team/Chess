@@ -2,8 +2,11 @@ package tests;
 
 import org.falcon.v1.Board;
 import org.junit.Test;
+
 import java.util.Arrays;
+
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class BoardTest {
 
@@ -28,7 +31,7 @@ public class BoardTest {
     }
     Board testBoard = new Board();
     @Test
-    public void testDefaultBoard() {
+    public void testZeroesBoard() {
         char[][] defaultBoard = new char[8][8];
         Arrays.stream(defaultBoard).forEach(row -> Arrays.fill(row, ' '));
         boolean areBoardsEqual = Arrays.deepEquals(defaultBoard, testBoard.getBoard());
@@ -38,5 +41,35 @@ public class BoardTest {
         }
          */
         assertFalse(areBoardsEqual);
+    }
+
+    Board testDefaultBoard = new Board();
+    /*
+-----------------
+|R|H|B|Q|K|B|H|R|
+|P|P|P|P|P|P|P|P|
+| | | | | | | | |
+| | | | | | | | |
+| | | | | | | | |
+| | | | | | | | |
+|P|P|P|P|P|P|P|P|
+|R|H|B|K|Q|B|H|R|
+-----------------
+ */
+    @Test
+    public void testDefaultBoard() {
+        char[][] expectedBoard = {
+                {'R', 'H', 'B', 'K', 'Q', 'B', 'H', 'R'},
+                {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
+                {'R', 'H', 'B', 'K', 'Q', 'B', 'H', 'R'}
+        };
+        char[][] actualBoard = this.testDefaultBoard.getBoard();
+        boolean boardsEqual = Arrays.deepEquals(expectedBoard, actualBoard);
+        assertTrue(boardsEqual);
     }
 }
