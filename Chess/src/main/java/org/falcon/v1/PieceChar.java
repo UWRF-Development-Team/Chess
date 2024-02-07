@@ -5,7 +5,8 @@ public enum PieceChar {
     ROOK('R'),
     HORSE('H'),
     KING('K'),
-    QUEEN('Q');
+    QUEEN('Q'),
+    EMPTY(' ');
     final char pieceChar;
     PieceChar(char pieceChar) {
         this.pieceChar = pieceChar;
