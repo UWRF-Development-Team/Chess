@@ -9,6 +9,11 @@ public class Main {
     }
 }
 /*
+
+Algorithm:
+Recursively loop through the array to check every available spot. Return those indices, and validate
+the current users choice (row and column)
+
  * board 8x8 - b&w spots (unique pathing), named spots/grid
  * players 2
  * pieces 6 unique 32 total
