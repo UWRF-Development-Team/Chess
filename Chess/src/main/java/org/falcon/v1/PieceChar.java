@@ -4,6 +4,7 @@ public enum PieceChar {
     PAWN('P'),
     ROOK('R'),
     HORSE('H'),
+    BISHOP('B'),
     KING('K'),
     QUEEN('Q'),
     EMPTY(' ');
