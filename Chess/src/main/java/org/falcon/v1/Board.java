@@ -38,7 +38,6 @@ public class Board {
         this.board = Arrays.copyOf(this.STARTING_BOARD, this.STARTING_BOARD.length);
 //        this.initializeBoard();
     }
-
     public void initializeBoard() {
         Arrays.stream(this.board).forEach(row -> Arrays.fill(row, ' '));
     }
@@ -63,7 +62,48 @@ public class Board {
     public void placePiece(int rowIndex, int colIndex, char piece) {
         this.board[rowIndex][colIndex] = piece;
     }
-
+    public void placePiece(BoardSpot spot, char piece) {
+        this.board[spot.getRow() - 1][spot.getCol() - 1] = piece;
+    }
+    public void moveForward(BoardSpot spot) {
+        int forwardAmount = this.chooseForwardAmount();
+        System.out.println("Moving forward...");
+        char piece = this.getPieceAtSpot(spot);
+        int row = spot.getRow();
+        int col = spot.getCol();
+        this.placePiece(spot, PieceChar.EMPTY.getPieceChar());
+        BoardSpot newSpot = new BoardSpot(row + forwardAmount, col);
+        this.placePiece(newSpot, piece);
+    }
+    public int chooseForwardAmount() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Would you like to move forward 1 or 2 spaces?");
+        boolean validInput = false;
+        int spaceAmount = 0;
+        while (!validInput) {
+            try {
+                spaceAmount = userInput.nextInt();
+                if (spaceAmount != 1 && spaceAmount != 2) {
+                    System.out.println("Please enter 1 or 2.");
+                } else {
+                    validInput = true;
+                }
+            } catch (InputMismatchException ex) {
+                System.out.println("Please try again.");
+            }
+        }
+        return spaceAmount;
+    }
+    public char getPieceAtSpot(BoardSpot spot) {
+        return this.board[spot.getRow() - 1][spot.getCol() - 1];
+    }
+    public boolean isPieceMoveBlocked(BoardSpot spot, int moveAmount) {
+        int row = spot.getRow();
+        int col = spot.getCol();
+        if (row == 1 || moveAmount == 2) {
+            return false;
+        }
+    }
     public char choosePiece() {
         Scanner userInput = new Scanner(System.in);
         System.out.println("""
@@ -109,7 +149,7 @@ public class Board {
                 BISHOP = 'B',
                 HORSE = 'H',
                 EMPTY = ' ';
-
+        System.out.println("Printing board");
         char[][] currentBoard = this.board;
         String header = "-".repeat(17);
         for (int rowIndex = 0; rowIndex < 8; rowIndex++) {
