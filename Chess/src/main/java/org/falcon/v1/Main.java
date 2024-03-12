@@ -9,7 +9,7 @@ public class Main {
     }
 }
 /*
-
+// Movement based approach
 Algorithm:
 Recursively loop through the array to check every available spot. Return those indices, and validate
 the current users choice (row and column)
