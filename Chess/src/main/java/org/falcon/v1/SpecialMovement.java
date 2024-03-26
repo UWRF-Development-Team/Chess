@@ -16,7 +16,7 @@ public class SpecialMovement extends Movement {
         return value >=0;
     }
     public boolean isValidMovement(BoardSpot start, BoardSpot end, boolean isFirstMove) {
-        int rowDifferenceRaw = start.getRow() - end.getRow();
+        int rowDifferenceRaw = end.getRow() - start.getRow();
         int rowDifference = Math.abs(start.getRow() - end.getRow());
         int colDifference = Math.abs(start.getCol() - end.getCol());
         boolean isDiagonal = this.isDiagonal(start, end);
