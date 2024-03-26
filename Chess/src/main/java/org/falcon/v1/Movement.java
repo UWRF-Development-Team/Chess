@@ -38,11 +38,25 @@ public class Movement {
         if (this.isHorse) {
             int combinedDifference = rowDifference + colDifference;
             if (rowDifference != 0 && colDifference != 0 && combinedDifference == 3) {
-                return true;
+                if (rowDifference == 1 && colDifference == 2) {
+                    return true;
+                } else if (rowDifference == 2 && colDifference == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
         return false;
     }
+
+    /**
+     * isDiagonal tests whether a given move is diagonal
+     * @param start - a BoardSpot which indices the initial position
+     * @param end  - of type BoardSpot which indicates the destination
+     * @return boolean true if the move is diagonal, false otherwise
+     */
+
     public boolean isDiagonal(BoardSpot start, BoardSpot end) {
         int rowDifference = Math.abs(start.getRow() - end.getRow());
         int colDifference = Math.abs(start.getCol() - end.getCol());
