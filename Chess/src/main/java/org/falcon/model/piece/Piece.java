@@ -1,13 +1,20 @@
-package org.falcon.v1;
+package org.falcon.model.piece;
 
-import java.util.ArrayList;
+import lombok.Getter;
+import lombok.Setter;
+import org.falcon.model.board.BoardSpot;
+import org.falcon.model.piece.movement.Movement;
 
+import java.util.List;
+
+@Getter
+@Setter
 public abstract class Piece {
-    Movement movement;
-    Piece(Movement movement) {
-        this.movement = movement;
+    public final Movement MOVEMENT = new Movement(0, 0, 0, 0);
+    Piece() {
+
     }
-    public abstract ArrayList<BoardSpot> possibleMoves();
+    public abstract List<BoardSpot> possibleMoves();
     //public abstract void losePiece();
     //public abstract void promotePiece();
     //public abstract void makeMove(int rowIndex, int colIndex);
