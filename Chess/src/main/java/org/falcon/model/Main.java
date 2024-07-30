@@ -1,6 +1,4 @@
-package org.falcon.v1;
-
-import java.util.Optional;
+package org.falcon.model;
 
 public class Main {
     public static void main(String[] args) {
@@ -95,15 +93,15 @@ the current users choice (row and column)
  * in bounds (on the board)
  *
  * Objects:
- * org.falcon.v1.Board
+ * org.falcon.model.board.Board
  *  - Space
  *  - Color
  *  - Sides
  *  - Size
  *  - Pieces
- * org.falcon.v1.Piece (6 different)
+ * org.falcon.model.piece.Piece (6 different)
  *  - Graveyard
- *  - On org.falcon.v1.Board
+ *  - On org.falcon.model.board.Board
  *  - Side (player)
  *  - type
  *  - Power
