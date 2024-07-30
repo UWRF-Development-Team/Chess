@@ -1,47 +1,46 @@
-package org.falcon.v1;
+package org.falcon.model.board;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.falcon.model.piece.Piece;
+import org.falcon.model.piece.PieceChar;
 
 import java.util.*;
 
-import static org.falcon.v1.PieceChar.*;
+import static org.falcon.model.piece.PieceChar.*;
 
+@Getter
+@Setter
 public class Board {
-    char[][] board;
-    final char[][] STARTING_BOARD = {
-            {ROOK.getPieceChar(),HORSE.getPieceChar(),BISHOP.getPieceChar(),QUEEN.getPieceChar(),
-             KING.getPieceChar(),BISHOP.getPieceChar(),HORSE.getPieceChar(),ROOK.getPieceChar()},
+    private char[][] board;
+    static final char[][] STARTING_BOARD = {
+            {ROOK.PIECE_CHAR,HORSE.PIECE_CHAR,BISHOP.PIECE_CHAR, KING.PIECE_CHAR, QUEEN.PIECE_CHAR, BISHOP.PIECE_CHAR,HORSE.PIECE_CHAR,ROOK.PIECE_CHAR},
 
-            {PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar(),
-             PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar()},
+            {PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR, PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR},
 
-            {EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),
-             EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar()},
+            {EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR, EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR},
 
-            {EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),
-            EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar()},
+            {EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR, EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR},
 
-            {EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),
-            EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar()},
+            {EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR, EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR},
 
-            {EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),
-            EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar(),EMPTY.getPieceChar()},
+            {EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR, EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR},
 
-            {PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar(),
-             PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar(),PAWN.getPieceChar()},
+            {PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR, PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR},
 
-            {ROOK.getPieceChar(),HORSE.getPieceChar(),BISHOP.getPieceChar(),QUEEN.getPieceChar(),
-             KING.getPieceChar(),BISHOP.getPieceChar(),HORSE.getPieceChar(),ROOK.getPieceChar()}
+            {ROOK.PIECE_CHAR,HORSE.PIECE_CHAR,BISHOP.PIECE_CHAR,KING.PIECE_CHAR,QUEEN.PIECE_CHAR,BISHOP.PIECE_CHAR,HORSE.PIECE_CHAR,ROOK.PIECE_CHAR}
     };
 
     //-------------------------------Constructor------------------------------
     public Board() {
         //Arrays.stream(this.STARTING_BOARD).forEach(row -> System.out.println((Arrays.toString(row))));
-        this.board = Arrays.copyOf(this.STARTING_BOARD, this.STARTING_BOARD.length);
+        this.board = Arrays.copyOf(STARTING_BOARD, STARTING_BOARD.length);
 //        this.initializeBoard();
     }
     public void initializeBoard() {
         Arrays.stream(this.board).forEach(row -> Arrays.fill(row, ' '));
     }
-    //-------------------------------Print-org.falcon.v1.Board------------------------------
+    //-------------------------------Print-Board------------------------------
     /*
     -----------------
     |R|H|B|Q|K|B|H|R|
@@ -71,7 +70,7 @@ public class Board {
         char piece = this.getPieceAtSpot(spot);
         int row = spot.getRow();
         int col = spot.getCol();
-        this.placePiece(spot, PieceChar.EMPTY.getPieceChar());
+        this.placePiece(spot, PieceChar.EMPTY.PIECE_CHAR);
         BoardSpot newSpot = new BoardSpot(row + forwardAmount, col);
         this.placePiece(newSpot, piece);
     }
@@ -103,6 +102,7 @@ public class Board {
         if (row == 1 || moveAmount == 2) {
             return false;
         }
+        return false; // TODO: Implement this
     }
     public char choosePiece() {
         Scanner userInput = new Scanner(System.in);
@@ -178,7 +178,7 @@ public class Board {
     public void capture(Piece capturedPiece) {
 
     }
-    //------------------------------org.falcon.v1.Piece-At----------------------------------
+    //------------------------------Piece-At----------------------------------
     public Optional<?> pieceAt(int rowIndex, int colIndex) {
         return null;
     }
@@ -214,13 +214,6 @@ public class Board {
         }
          */
         return false;
-    }
-
-    public char[][] getBoard() {
-        return this.board;
-    }
-    public void setBoard(char[][] board) {
-        this.board = board;
     }
 }
 
