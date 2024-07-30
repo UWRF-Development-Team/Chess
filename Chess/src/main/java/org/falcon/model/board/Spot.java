@@ -1,8 +1,8 @@
-package org.falcon.v1;
+package org.falcon.model.board;
 
 public class Spot {
     String color;
-    // org.falcon.v1.Piece piece;
+    // Piece piece;
     boolean isTaken;
     boolean isPromotionSpot;
 
