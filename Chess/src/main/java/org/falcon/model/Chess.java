@@ -1,4 +1,8 @@
-package org.falcon.v1;
+package org.falcon.model;
+
+import org.falcon.model.board.Board;
+import org.falcon.model.board.BoardSpot;
+import org.falcon.model.piece.PieceChar;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -75,7 +79,7 @@ public class Chess {
     public boolean isCoordinateEmpty(int row, int col) {
         BoardSpot spot = new BoardSpot(row, col);
         char pieceAtSpot = this.board.getPieceAtSpot(spot);
-        if (pieceAtSpot == PieceChar.EMPTY.getPieceChar()) {
+        if (pieceAtSpot == PieceChar.EMPTY.PIECE_CHAR) {
             return true;
         } else {
             return false;
