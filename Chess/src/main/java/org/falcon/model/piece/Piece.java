@@ -10,11 +10,13 @@ import java.util.List;
 @Getter
 @Setter
 public abstract class Piece {
-    public final Movement MOVEMENT = new Movement(0, 0, 0, 0);
+    final Movement movement = new Movement(0, 0, 0, 0);
     Piece() {
 
     }
-    public abstract List<BoardSpot> possibleMoves();
+    // TODO: possibleMoves() should be used to light up hints for the user.
+
+    //    public abstract List<BoardSpot> possibleMoves();
     //public abstract void losePiece();
     //public abstract void promotePiece();
     //public abstract void makeMove(int rowIndex, int colIndex);
