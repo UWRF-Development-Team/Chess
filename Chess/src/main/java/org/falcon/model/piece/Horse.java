@@ -1,7 +1,11 @@
 package org.falcon.model.piece;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.falcon.model.piece.movement.SpecialMovement;
 
-public class Horse {
-    public final SpecialMovement MOVEMENT = new SpecialMovement(3, 3, 3, 3, PieceChar.HORSE);
+@Getter
+@Setter
+public class Horse extends Piece {
+    final SpecialMovement movement = new SpecialMovement(3, 3, 3, 3, this);
 }
