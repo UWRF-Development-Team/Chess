@@ -1,7 +1,11 @@
 package org.falcon.model.piece;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.falcon.model.piece.movement.Movement;
 
-public class Bishop {
-    public final Movement MOVEMENT = new Movement(0, 0, -1, -1);
+@Getter
+@Setter
+public class Bishop extends Piece {
+    private final Movement movement = new Movement(0, 0, -1, -1);
 }
