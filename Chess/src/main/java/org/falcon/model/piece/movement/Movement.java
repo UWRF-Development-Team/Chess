@@ -24,13 +24,16 @@ public class Movement {
     public static boolean isMoveable(int movementValue) {
         return movementValue != 0;
     }
+    public static boolean inRange(int changeValue, int range) {
+        return changeValue <= range;
+    }
     public boolean isValidMovement(BoardSpot start, BoardSpot end) {
         int rowDifference = Math.abs(start.getRow() - end.getRow());
         int colDifference = Math.abs(start.getCol() - end.getCol());
-        if (this.diagonal != 0) {
+        if (isMoveable(this.diagonal)) {
             boolean moveIsDiagonal = isDiagonal(start, end);
             if (moveIsDiagonal) {
-                if (isInfinite(this.diagonal) || this.diagonal <= rowDifference) {
+                if (isInfinite(this.diagonal) || (inRange(rowDifference, this.diagonal) && inRange(colDifference, this.diagonal))) {
                     return true;
                 }
             }
@@ -38,10 +41,10 @@ public class Movement {
         if (isMoveable(this.horizontal) && isMoveable(this.forward) && isMoveable(this.backward)) {
             boolean moveIsStraight = isStraight(start, end);
             if (moveIsStraight) {
-                if (isInfinite(this.horizontal) || this.horizontal <= colDifference) {
+                if (isInfinite(this.horizontal) ||  colDifference <= this.horizontal) {
                     return true;
-                } else if (isInfinite(this.forward) || this.forward <= rowDifference ||
-                           isInfinite(this.backward) || this.backward <= rowDifference) {
+                } else if (isInfinite(this.forward) || inRange(rowDifference, this.forward) ||
+                           isInfinite(this.backward) || inRange(rowDifference, this.backward)) {
                     return true;
                 }
             }
@@ -59,11 +62,7 @@ public class Movement {
     public static boolean isDiagonal(BoardSpot start, BoardSpot end) {
         int rowDifference = Math.abs(start.getRow() - end.getRow());
         int colDifference = Math.abs(start.getCol() - end.getCol());
-        if (rowDifference == 0 || colDifference == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return rowDifference != 0 && colDifference != 0;
     }
     public static boolean isStraight(BoardSpot start, BoardSpot end) {
         return !isDiagonal(start, end);
