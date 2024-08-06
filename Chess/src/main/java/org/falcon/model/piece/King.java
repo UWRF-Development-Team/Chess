@@ -1,9 +1,13 @@
 package org.falcon.model.piece;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.falcon.model.piece.movement.Movement;
 
-public class King {
-    public final Movement MOVEMENT = new Movement(1, 1, 1, 1);
+@Getter
+@Setter
+public class King extends Piece {
+    final Movement movement = new Movement(1, 1, 1, 1);
     public King() {
 
     }
