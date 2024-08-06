@@ -1,22 +1,44 @@
 package org.falcon.model.piece.movement;
 
+import org.falcon.model.board.Board;
 import org.falcon.model.board.BoardSpot;
+import org.falcon.model.piece.Horse;
+import org.falcon.model.piece.Pawn;
+import org.falcon.model.piece.Piece;
 import org.falcon.model.piece.PieceChar;
 
+
 public class SpecialMovement extends Movement {
-    private PieceChar pieceChar;
-    public SpecialMovement(int forward, int backward, int horizontal, int diagonal, PieceChar pieceChar) {
+    private Piece piece;
+    private Board board; // A board may be needed to know if a pawn can move diagonally
+    public SpecialMovement(int forward, int backward, int horizontal, int diagonal, Piece piece) {
         super(forward, backward, horizontal, diagonal);
-        this.pieceChar = pieceChar;
+        this.piece = piece;
     }
     public boolean isHorse() {
-        return this.pieceChar.PIECE_CHAR == PieceChar.HORSE.PIECE_CHAR;
+        return this.piece instanceof Horse;
+    }
+    public boolean isPawn() {
+        return this.piece instanceof Pawn;
     }
     @Override
     public boolean isValidMovement(BoardSpot start, BoardSpot end) {
-        if (!this.isHorse()) {
-            return super.isValidMovement(start, end);
+//        if (!this.isHorse()) {
+//            return super.isValidMovement(start, end);
+//        }
+        if (this.isHorse()) {
+            return this.isValidHorseMovement(start, end);
         }
+        if (this.isPawn()) {
+            return this.isValidPawnMovement(start, end);
+        }
+        return false;
+    }
+
+    public boolean isValidPawnMovement(BoardSpot start, BoardSpot end) {
+        return false;
+    }
+    public boolean isValidHorseMovement(BoardSpot start, BoardSpot end) {
         int rowDifference = Math.abs(start.getRow() - end.getRow());
         int colDifference = Math.abs(start.getCol() - end.getCol());
         int combinedDifference = rowDifference + colDifference;
