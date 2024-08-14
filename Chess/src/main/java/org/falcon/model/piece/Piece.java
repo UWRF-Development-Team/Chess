@@ -4,16 +4,19 @@ import lombok.Getter;
 import lombok.Setter;
 import org.falcon.model.board.BoardSpot;
 import org.falcon.model.piece.movement.Movement;
+import org.falcon.model.player.Player;
 
 import java.util.List;
 
 @Getter
 @Setter
 public abstract class Piece {
-    final Movement movement = new Movement(0, 0, 0, 0);
+    private final Movement movement = new Movement(0, 0, 0, 0);
+    private Player player;
     Piece() {
-
+        this.player = null;
     }
+
     // TODO: possibleMoves() should be used to light up hints for the user.
 
     //    public abstract List<BoardSpot> possibleMoves();
