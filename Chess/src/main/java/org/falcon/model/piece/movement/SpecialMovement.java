@@ -1,5 +1,7 @@
 package org.falcon.model.piece.movement;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.falcon.model.board.Board;
 import org.falcon.model.board.BoardSpot;
 import org.falcon.model.piece.Horse;
@@ -7,13 +9,19 @@ import org.falcon.model.piece.Pawn;
 import org.falcon.model.piece.Piece;
 import org.falcon.model.piece.PieceChar;
 
-
+@Getter
+@Setter
 public class SpecialMovement extends Movement {
     private Piece piece;
     private Board board; // A board may be needed to know if a pawn can move diagonally
     public SpecialMovement(int forward, int backward, int horizontal, int diagonal, Piece piece) {
         super(forward, backward, horizontal, diagonal);
         this.piece = piece;
+    }
+    public SpecialMovement(int forward, int backward, int horizontal, int diagonal, Piece piece, Board board) {
+        super(forward, backward, horizontal, diagonal);
+        this.piece = piece;
+        this.board = board;
     }
     public boolean isHorse() {
         return this.piece instanceof Horse;
@@ -36,7 +44,23 @@ public class SpecialMovement extends Movement {
     }
 
     public boolean isValidPawnMovement(BoardSpot start, BoardSpot end) {
-        return false;
+        this.setPawnForward();
+        int rowDifference = Math.abs(start.getRow() - end.getRow());
+        int colDifference = Math.abs(start.getCol() - end.getCol());
+        boolean isDiagonal = isDiagonal(start, end);
+        if (isDiagonal) {
+
+        }
+
+    }
+    public void setPawnForward() {
+        if (this.piece instanceof Pawn pawn) {
+            if (pawn.isFirstMove()) {
+                this.setForward(2);
+            } else {
+                this.setForward(1);
+            }
+        }
     }
     public boolean isValidHorseMovement(BoardSpot start, BoardSpot end) {
         int rowDifference = Math.abs(start.getRow() - end.getRow());
