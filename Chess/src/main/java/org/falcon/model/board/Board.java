@@ -2,44 +2,72 @@ package org.falcon.model.board;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.falcon.model.piece.Piece;
-import org.falcon.model.piece.PieceChar;
+import org.falcon.model.piece.*;
 
 import java.util.*;
 
-import static org.falcon.model.piece.PieceChar.*;
 
 @Getter
 @Setter
 public class Board {
-    private char[][] board;
-    static final char[][] STARTING_BOARD = {
-            {ROOK.PIECE_CHAR,HORSE.PIECE_CHAR,BISHOP.PIECE_CHAR, KING.PIECE_CHAR, QUEEN.PIECE_CHAR, BISHOP.PIECE_CHAR,HORSE.PIECE_CHAR,ROOK.PIECE_CHAR},
-
-            {PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR, PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR},
-
-            {EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR, EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR},
-
-            {EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR, EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR},
-
-            {EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR, EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR},
-
-            {EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR, EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR,EMPTY.PIECE_CHAR},
-
-            {PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR, PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR,PAWN.PIECE_CHAR},
-
-            {ROOK.PIECE_CHAR,HORSE.PIECE_CHAR,BISHOP.PIECE_CHAR,KING.PIECE_CHAR,QUEEN.PIECE_CHAR,BISHOP.PIECE_CHAR,HORSE.PIECE_CHAR,ROOK.PIECE_CHAR}
-    };
-
+    private List<List<Optional<Piece>>> board;
     //-------------------------------Constructor------------------------------
     public Board() {
-        //Arrays.stream(this.STARTING_BOARD).forEach(row -> System.out.println((Arrays.toString(row))));
-        this.board = Arrays.copyOf(STARTING_BOARD, STARTING_BOARD.length);
-//        this.initializeBoard();
+        this.board = this.getInitialBoard();
     }
-    public void initializeBoard() {
-        Arrays.stream(this.board).forEach(row -> Arrays.fill(row, ' '));
+    public List<List<Optional<Piece>>> getInitialBoard() {
+        List<List<Optional<Piece>>> board = getEmptyBoard();
+        final PieceChar[][] startingBoard = {
+                {PieceChar.ROOK, PieceChar.HORSE, PieceChar.BISHOP, PieceChar.QUEEN, PieceChar.KING, PieceChar.BISHOP, PieceChar.HORSE, PieceChar.ROOK},
+                {PieceChar.PAWN, PieceChar.PAWN,  PieceChar.PAWN,   PieceChar.PAWN,  PieceChar.PAWN, PieceChar.PAWN,   PieceChar.PAWN,  PieceChar.PAWN},
+                {PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY},
+                {PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY},
+                {PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY},
+                {PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY},
+                {PieceChar.PAWN, PieceChar.PAWN,  PieceChar.PAWN,   PieceChar.PAWN,  PieceChar.PAWN, PieceChar.PAWN,   PieceChar.PAWN,  PieceChar.PAWN},
+                {PieceChar.ROOK, PieceChar.HORSE, PieceChar.BISHOP, PieceChar.KING,  PieceChar.QUEEN, PieceChar.BISHOP, PieceChar.HORSE, PieceChar.ROOK}
+        };
+        for (int rowIndex = 0; rowIndex < 8; rowIndex++) {
+            for (int colIndex = 0; colIndex < 8; colIndex++) {
+                BoardSpot spot = new BoardSpot(rowIndex + 1, colIndex + 1);
+                PieceChar pieceChar = startingBoard[rowIndex][colIndex];
+                Piece piece = switch (pieceChar) {
+                    case PAWN -> new Pawn(this);
+                    case ROOK -> new Rook();
+                    case HORSE -> new Horse();
+                    case BISHOP -> new Bishop();
+                    case KING -> new King();
+                    case QUEEN -> new Queen();
+                    case EMPTY -> null;
+                };
+                if (piece != null) {
+                    placePiece(board, spot, piece);
+                }
+            }
+        }
+        return board;
     }
+
+    private static void placePiece(List<List<Optional<Piece>>> board, BoardSpot spot, Piece piece) {
+        board.get(spot.getRow() - 1).set(spot.getCol() - 1, Optional.of(piece));
+    }
+
+    public static List<List<Optional<Piece>>> getEmptyBoard() {
+        List<List<Optional<Piece>>> board = new ArrayList<>();
+        for (int rowIndex = 0; rowIndex < 8; rowIndex++) {
+            List<Optional<Piece>> row = new ArrayList<>();
+            for (int colIndex = 0; colIndex < 8; colIndex++) {
+                row.add(Optional.empty());
+            }
+            board.add(row);
+        }
+        return board;
+    }
+
+    public boolean containsPiece(BoardSpot spot) {
+        return this.board.get(spot.getRow() - 1).get(spot.getCol() - 1).isPresent();
+    }
+
     //-------------------------------Print-Board------------------------------
     /*
     -----------------
@@ -53,6 +81,10 @@ public class Board {
     |R|H|B|K|Q|B|H|R|
     -----------------
      */
+
+
+    /*
+
     //row: 0-7, col: 0-7
     public void placeKing(int rowIndex, int colIndex) {
         this.board[rowIndex][colIndex] = 'K';
@@ -212,9 +244,10 @@ public class Board {
                 // check up/down sides
             }
         }
-         */
+
         return false;
     }
+    */
 }
 
 
