@@ -1,9 +1,9 @@
 package junit.model.piece.movement;
 
 import org.falcon.model.board.BoardSpot;
-import org.falcon.model.piece.King;
-import org.falcon.model.piece.Queen;
-import org.falcon.model.piece.Rook;
+import org.falcon.model.piece.member.King;
+import org.falcon.model.piece.member.Queen;
+import org.falcon.model.piece.member.Rook;
 import org.falcon.model.piece.movement.Movement;
 import org.junit.Test;
 
