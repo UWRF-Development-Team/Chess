@@ -1,10 +1,11 @@
-package org.falcon.model.piece;
+package org.falcon.model.piece.member;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.falcon.model.board.Board;
-import org.falcon.model.piece.movement.Movement;
+import org.falcon.model.piece.Piece;
 import org.falcon.model.piece.movement.SpecialMovement;
+import org.falcon.model.player.Player;
 
 @Getter
 @Setter
@@ -13,6 +14,10 @@ public class Pawn extends Piece {
     private boolean firstMove;
     public Pawn() {
         this(true);
+    }
+    public Pawn(Player player) {
+        super(player);
+        this.firstMove = true;
     }
     public Pawn(boolean firstMove) {
         this.firstMove = firstMove;
