@@ -4,10 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.falcon.model.board.Board;
 import org.falcon.model.board.BoardSpot;
-import org.falcon.model.piece.Horse;
-import org.falcon.model.piece.Pawn;
+import org.falcon.model.piece.member.Horse;
+import org.falcon.model.piece.member.Pawn;
 import org.falcon.model.piece.Piece;
-import org.falcon.model.piece.PieceChar;
 
 @Getter
 @Setter
