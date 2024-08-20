@@ -3,6 +3,8 @@ package org.falcon.model.board;
 import lombok.Getter;
 import lombok.Setter;
 import org.falcon.model.piece.*;
+import org.falcon.model.piece.member.*;
+import org.falcon.model.player.Player;
 
 import java.util.*;
 
@@ -11,43 +13,47 @@ import java.util.*;
 @Setter
 public class Board {
     private List<List<Optional<Piece>>> board;
+    private List<Player> players;
     //-------------------------------Constructor------------------------------
     public Board() {
         this.board = this.getInitialBoard();
+        this.initializePlayerPiecesToBoard(); // Will add board dependency where needed
     }
     public List<List<Optional<Piece>>> getInitialBoard() {
         List<List<Optional<Piece>>> board = getEmptyBoard();
-        final PieceChar[][] startingBoard = {
-                {PieceChar.ROOK, PieceChar.HORSE, PieceChar.BISHOP, PieceChar.QUEEN, PieceChar.KING, PieceChar.BISHOP, PieceChar.HORSE, PieceChar.ROOK},
-                {PieceChar.PAWN, PieceChar.PAWN,  PieceChar.PAWN,   PieceChar.PAWN,  PieceChar.PAWN, PieceChar.PAWN,   PieceChar.PAWN,  PieceChar.PAWN},
-                {PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY},
-                {PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY},
-                {PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY},
-                {PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY, PieceChar.EMPTY},
-                {PieceChar.PAWN, PieceChar.PAWN,  PieceChar.PAWN,   PieceChar.PAWN,  PieceChar.PAWN, PieceChar.PAWN,   PieceChar.PAWN,  PieceChar.PAWN},
-                {PieceChar.ROOK, PieceChar.HORSE, PieceChar.BISHOP, PieceChar.KING,  PieceChar.QUEEN, PieceChar.BISHOP, PieceChar.HORSE, PieceChar.ROOK}
-        };
-        for (int rowIndex = 0; rowIndex < 8; rowIndex++) {
-            for (int colIndex = 0; colIndex < 8; colIndex++) {
-                BoardSpot spot = new BoardSpot(rowIndex + 1, colIndex + 1);
-                PieceChar pieceChar = startingBoard[rowIndex][colIndex];
-                Piece piece = switch (pieceChar) {
-                    case PAWN -> new Pawn(this);
-                    case ROOK -> new Rook();
-                    case HORSE -> new Horse();
-                    case BISHOP -> new Bishop();
-                    case KING -> new King();
-                    case QUEEN -> new Queen();
-                    case EMPTY -> null;
+        for (int playerIndex = 1; playerIndex <= this.players.size(); playerIndex++) {
+            Player player = this.players.get(playerIndex);
+                int beginPlacementRow = switch (playerIndex) {
+                    case 1 -> 0;
+                    case 2 -> 6;
+                    default -> throw new IllegalStateException("Unexpected value: " + playerIndex);
                 };
-                if (piece != null) {
-                    placePiece(board, spot, piece);
+                int pieceIndex = 0;
+                for (int rowIndex = beginPlacementRow; rowIndex < beginPlacementRow + 2; rowIndex++) {
+                    for (int colIndex = 0; colIndex < 8; colIndex++) {
+                        Piece pieceToPlace = player.getPieceCollection().getPieces().get(pieceIndex);
+                        placePiece(board, new BoardSpot(rowIndex + 1, colIndex + 1), pieceToPlace);
+                        pieceIndex++;
+                    }
                 }
-            }
         }
         return board;
     }
-
+    public boolean isSpotOccupied(BoardSpot spot) {
+        return this.board.get(spot.getRow() - 1).get(spot.getCol() - 1).isPresent();
+    }
+    public void initializePlayerPiecesToBoard() {
+        for (Player player : this.players) {
+            for (Piece piece : player.getPieceCollection().getPieces()) {
+                if (piece instanceof Pawn pawn) {
+                    pawn.getMovement().setBoard(this);
+                }
+            }
+        }
+    }
+    public void placePiece(BoardSpot spot, Piece piece) {
+        this.board.get(spot.getRow() - 1).set(spot.getCol() - 1, Optional.of(piece));
+    }
     private static void placePiece(List<List<Optional<Piece>>> board, BoardSpot spot, Piece piece) {
         board.get(spot.getRow() - 1).set(spot.getCol() - 1, Optional.of(piece));
     }
