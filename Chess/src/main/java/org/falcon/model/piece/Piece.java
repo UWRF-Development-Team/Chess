@@ -12,9 +12,16 @@ import java.util.List;
 @Setter
 public abstract class Piece {
     private final Movement movement = new Movement(0, 0, 0, 0);
-    private Player player;
-    Piece() {
+    protected Player player;
+    public Piece() {
         this.player = null;
+    }
+    public Piece(Player player) {
+        this.player = player;
+    }
+
+    public boolean isEnemyPiece(Piece piece) {
+        return !this.player.equals(piece.getPlayer());
     }
 
     // TODO: possibleMoves() should be used to light up hints for the user.
@@ -26,13 +33,13 @@ public abstract class Piece {
     //public abstract boolean validMove(int rowIndex, int colIndex);
     // Type
     // Chess pieces
-        // Queen
-        // King
-        // Rook
-        // Bishop
-        // Knight
-        // Pawn
-        //- pawn should have properties that allow promotion
+    // Queen
+    // King
+    // Rook
+    // Bishop
+    // Knight
+    // Pawn
+    //- pawn should have properties that allow promotion
 
 }
 
