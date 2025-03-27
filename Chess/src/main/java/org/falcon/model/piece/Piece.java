@@ -13,6 +13,8 @@ import java.util.List;
 public abstract class Piece {
     private final Movement movement = new Movement(0, 0, 0, 0);
     protected Player player;
+
+    // Constructors
     public Piece() {
         this.player = null;
     }
@@ -25,6 +27,7 @@ public abstract class Piece {
     }
 
     // TODO: possibleMoves() should be used to light up hints for the user.
+    // TODO: Add a page for the movement rules
 
     //    public abstract List<BoardSpot> possibleMoves();
     //public abstract void losePiece();
