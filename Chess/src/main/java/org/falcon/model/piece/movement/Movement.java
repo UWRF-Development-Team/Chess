@@ -27,6 +27,7 @@ public class Movement {
     public static boolean inRange(int changeValue, int range) {
         return changeValue <= range;
     }
+    // Seeing if movement is valid
     public boolean isValidMovement(BoardSpot start, BoardSpot end) {
         int rowDifference = Math.abs(start.getRow() - end.getRow());
         int colDifference = Math.abs(start.getCol() - end.getCol());
