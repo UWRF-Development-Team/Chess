@@ -1,15 +1,10 @@
-package org.falcon.model;
+package org.falcon.model.chess;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.falcon.model.board.Board;
-import org.falcon.model.board.BoardSpot;
-import org.falcon.model.piece.PieceChar;
 import org.falcon.model.player.Player;
 import org.falcon.model.player.PlayerChar;
-
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 //"controller" to collectively use other classes and perform actions
 @Getter
@@ -19,11 +14,37 @@ public class Chess {
     private Board board;
     private Player playerOne;
     private Player playerTwo;
+    private Turn currentTurn;
     public Chess() {
         this.board = new Board();
         this.playerOne = new Player(PlayerChar.WHITE);
         this.playerTwo = new Player(PlayerChar.BLACK);
+        this.currentTurn = new Turn();
+
     }
+
+    // making a turn and checking whose turn it is
+    public void updateTurn(){
+        currentTurn.makeTurn();
+    }
+    public boolean isWhiteTurn(){
+        //This method sees if it is the white pieces turn
+        //if not, it is implied that it is the black pieces turn
+        return(currentTurn.CheckIfWhiteTurn());
+    }
+    public void assignTurn (boolean whosTurn){
+        if(whosTurn){
+            playerOne.setTurnStatus(true);
+            playerTwo.setTurnStatus(false);
+        }
+        else{
+            playerOne.setTurnStatus(false);
+            playerTwo.setTurnStatus(true);
+        }
+    }
+
+
+
 
 /*
 //    public void playGame() {
