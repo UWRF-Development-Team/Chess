@@ -10,6 +10,7 @@ import org.falcon.model.player.Player;
 @Setter
 public class Rook extends Piece {
     final Movement movement = new Movement(-1, -1, -1, 0);
+    public Rook() {}
     public Rook(Player player) {
         super(player);
     }
