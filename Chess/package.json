@@ -1,0 +1,14 @@
+{
+  "name": "chess",
+  "version": "0.0.1",
+  "description": "",
+  "main": "global.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "UWRF ACM Dev Team",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.8.2"
+  }
+}
