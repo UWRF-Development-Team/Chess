@@ -13,6 +13,7 @@ import java.util.*;
 public class Player {
     private PlayerChar playerChar;
     private PieceCollection pieceCollection;
+    private boolean TurnStatus = false;
     public Player(PlayerChar playerChar) {
         this.playerChar = playerChar;
         this.pieceCollection = new PieceCollection(this);
