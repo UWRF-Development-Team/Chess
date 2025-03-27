@@ -1,9 +1,11 @@
 package org.falcon.model;
 
+import org.falcon.model.chess.Chess;
+
 public class Main {
     public static void main(String[] args) {
         Chess chess = new Chess();
-        chess.playGame();
+//        chess.playGame();
     }
 }
 /*
