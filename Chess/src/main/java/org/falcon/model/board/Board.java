@@ -57,7 +57,7 @@ public class Board {
     private static void placePiece(List<List<Optional<Piece>>> board, BoardSpot spot, Piece piece) {
         board.get(spot.getRow() - 1).set(spot.getCol() - 1, Optional.of(piece));
     }
-
+    
     public static List<List<Optional<Piece>>> getEmptyBoard() {
         List<List<Optional<Piece>>> board = new ArrayList<>();
         for (int rowIndex = 0; rowIndex < 8; rowIndex++) {
