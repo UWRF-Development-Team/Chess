@@ -57,7 +57,10 @@ public class SpecialMovement extends Movement {
         int colDifference = Math.abs(start.getCol() - end.getCol());
         boolean isDiagonal = isDiagonal(start, end);
         if (isDiagonal) {
-
+            List<BoardSpot> availableDiagonals = start.getDiagonalSpot();
+            for (BoardSpot boardSpot : availableDiagonals) {
+                int diagonalRowDifference = start.getRow() - boardSpot.getRow();
+            }
         }
         return false;
     }
