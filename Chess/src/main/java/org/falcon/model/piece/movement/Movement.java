@@ -30,19 +30,27 @@ public class Movement {
     public boolean isValidMovement(BoardSpot start, BoardSpot end) {
         int rowDifference = Math.abs(start.getRow() - end.getRow());
         int colDifference = Math.abs(start.getCol() - end.getCol());
+        // Can move diagonally.
         if (isMoveable(this.diagonal)) {
+            // Is the movement diagonal?
             boolean moveIsDiagonal = isDiagonal(start, end);
             if (moveIsDiagonal) {
-                if (isInfinite(this.diagonal) || (inRange(rowDifference, this.diagonal) && inRange(colDifference, this.diagonal))) {
+                // If it is diagonal, is it within their range.
+                if (isInfinite(this.diagonal) || (inRange(rowDifference, this.diagonal)
+                        && inRange(colDifference, this.diagonal))) {
                     return true;
                 }
             }
         }
+        // Can go straight
         if (isMoveable(this.horizontal) && isMoveable(this.forward) && isMoveable(this.backward)) {
+            // Is the move straight?
             boolean moveIsStraight = isStraight(start, end);
             if (moveIsStraight) {
+                // Is within range left or right
                 if (isInfinite(this.horizontal) ||  colDifference <= this.horizontal) {
                     return true;
+                    // Is in range up or down
                 } else if (isInfinite(this.forward) || inRange(rowDifference, this.forward) ||
                            isInfinite(this.backward) || inRange(rowDifference, this.backward)) {
                     return true;
@@ -60,11 +68,13 @@ public class Movement {
      */
 
     public static boolean isDiagonal(BoardSpot start, BoardSpot end) {
+        // Diagonal always moves from one row to another and one column to another
         int rowDifference = Math.abs(start.getRow() - end.getRow());
         int colDifference = Math.abs(start.getCol() - end.getCol());
         return rowDifference != 0 && colDifference != 0;
     }
     public static boolean isStraight(BoardSpot start, BoardSpot end) {
+        // Any move that is not diagonal is straight
         return !isDiagonal(start, end);
     }
     /*
