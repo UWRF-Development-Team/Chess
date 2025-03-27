@@ -50,7 +50,7 @@ public class SpecialMovement extends Movement {
         if (isDiagonal) {
 
         }
-
+        return false;
     }
     public void setPawnForward() {
         if (this.piece instanceof Pawn pawn) {
@@ -65,6 +65,7 @@ public class SpecialMovement extends Movement {
         int rowDifference = Math.abs(start.getRow() - end.getRow());
         int colDifference = Math.abs(start.getCol() - end.getCol());
         int combinedDifference = rowDifference + colDifference;
+        // Cannot be a straight line, and all movement should be 3 with two forward and one to the side
         if (rowDifference != 0 && colDifference != 0 && combinedDifference == 3) {
             if (rowDifference == 1 && colDifference == 2) {
                 return true;
@@ -80,6 +81,7 @@ public class SpecialMovement extends Movement {
         return value >= 0;
     }
     public boolean isValidMovement(BoardSpot start, BoardSpot end, boolean isFirstMove) {
+        // See if it is backwards or forwards
         int rowDifferenceRaw = end.getRow() - start.getRow();
         int rowDifference = Math.abs(start.getRow() - end.getRow());
         int colDifference = Math.abs(start.getCol() - end.getCol());
