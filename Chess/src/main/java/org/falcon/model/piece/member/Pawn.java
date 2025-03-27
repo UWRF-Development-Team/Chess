@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.falcon.model.board.Board;
 import org.falcon.model.piece.Piece;
+import org.falcon.model.piece.PieceOrientation;
 import org.falcon.model.piece.movement.SpecialMovement;
 import org.falcon.model.player.Player;
 import org.falcon.model.player.PlayerChar;
@@ -22,6 +23,10 @@ public class Pawn extends Piece {
         super(player);
         this.firstMove = true;
 
+    }
+    public Pawn (Player player, PieceOrientation pieceOrientation) {
+        this(player);
+        this.pieceOrientation = pieceOrientation;
     }
     public Pawn(boolean firstMove) {
         this.firstMove = firstMove;
