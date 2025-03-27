@@ -4,15 +4,19 @@ import lombok.Getter;
 import lombok.Setter;
 import org.falcon.model.board.Board;
 import org.falcon.model.board.BoardSpot;
+import org.falcon.model.piece.PieceOrientation;
 import org.falcon.model.piece.member.Horse;
 import org.falcon.model.piece.member.Pawn;
 import org.falcon.model.piece.Piece;
+
+import java.util.List;
 
 @Getter
 @Setter
 public class SpecialMovement extends Movement {
     private Piece piece;
     private Board board; // A board may be needed to know if a pawn can move diagonally
+    private PieceOrientation pieceOrientation;
     public SpecialMovement(int forward, int backward, int horizontal, int diagonal, Piece piece) {
         super(forward, backward, horizontal, diagonal);
         this.piece = piece;
@@ -28,6 +32,7 @@ public class SpecialMovement extends Movement {
     public boolean isPawn() {
         return this.piece instanceof Pawn;
     }
+
     @Override
     public boolean isValidMovement(BoardSpot start, BoardSpot end) {
 //        if (!this.isHorse()) {
@@ -45,6 +50,10 @@ public class SpecialMovement extends Movement {
     public boolean isValidPawnMovement(BoardSpot start, BoardSpot end) {
         this.setPawnForward();
         int rowDifference = Math.abs(start.getRow() - end.getRow());
+        int rawRowDifference = start.getRow() - end.getRow();
+        if (!this.isForward(rawRowDifference)) {
+            return false;
+        }
         int colDifference = Math.abs(start.getCol() - end.getCol());
         boolean isDiagonal = isDiagonal(start, end);
         if (isDiagonal) {
@@ -78,7 +87,17 @@ public class SpecialMovement extends Movement {
         return false;
     }
     public boolean isForward(int value) {
-        return value >= 0;
+        if (this.piece instanceof Pawn pawn) {
+            if (pawn.getPieceOrientation() == PieceOrientation.TOP) {
+                return value <= 0;
+            }
+            else {
+                return value >= 0;
+            }
+        }
+        else {
+            return false;
+        }
     }
     public boolean isValidMovement(BoardSpot start, BoardSpot end, boolean isFirstMove) {
         // See if it is backwards or forwards
