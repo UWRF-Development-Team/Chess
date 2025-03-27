@@ -22,6 +22,7 @@ public class PieceCollection {
     };
     private Player player;
     private List<Piece> pieces;
+    // Constructor
     public PieceCollection(Player player) {
         this.player = player;
         this.pieces = this.getInitialPieces();
