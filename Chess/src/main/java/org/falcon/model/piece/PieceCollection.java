@@ -31,6 +31,15 @@ public class PieceCollection {
         this.player = player;
         this.pieces = pieces;
     }
+
+    public PieceOrientation getPieceOrientation() {
+        if(this.player.getPlayerChar() == PlayerChar.WHITE) {
+           return PieceOrientation.BOTTOM;
+        }
+        else {
+            return PieceOrientation.TOP;
+        }
+    }
     public List<Piece> getInitialPieces() {
         List<Piece> pieces = new ArrayList<>();
         // Alternatives like predefined members and counts can be put into
@@ -43,7 +52,7 @@ public class PieceCollection {
             for (int colIndex = 0; colIndex < 8; colIndex++) {
                 PieceChar pieceChar = startingPieces[rowIndex][colIndex];
                 Piece piece = switch (pieceChar) {
-                    case PAWN -> new Pawn(this.player);
+                    case PAWN -> new Pawn(this.player, this.getPieceOrientation());
                     case ROOK -> new Rook(this.player);
                     case HORSE -> new Horse(this.player);
                     case BISHOP -> new Bishop(this.player);
