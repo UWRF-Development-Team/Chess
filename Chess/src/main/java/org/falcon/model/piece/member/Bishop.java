@@ -9,7 +9,8 @@ import org.falcon.model.player.Player;
 @Getter
 @Setter
 public class Bishop extends Piece {
-    private final Movement movement = new Movement(0, 0, -1, -1);
+    private final Movement movement = new Movement(0, 0, 0, -1);
+    public Bishop () {}
     public Bishop(Player player) {
         super(player);
     }
