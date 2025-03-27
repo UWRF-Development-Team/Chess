@@ -63,7 +63,7 @@ public class Movement {
     /**
      * isDiagonal tests whether a given move is diagonal
      * @param start - a BoardSpot which indices the initial position
-     * @param end  - of type BoardSpot which indicates the destination
+     * @param end  - of type, BoardSpot which indicates the destination
      * @return boolean true if the move is diagonal, false otherwise
      */
 
