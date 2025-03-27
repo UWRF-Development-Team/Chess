@@ -10,6 +10,9 @@ import org.falcon.model.player.Player;
 @Setter
 public class Horse extends Piece {
     final SpecialMovement movement = new SpecialMovement(3, 3, 3, 3, this);
+    public Horse() {
+
+    }
     public Horse(Player player) {
         super(player);
     }
