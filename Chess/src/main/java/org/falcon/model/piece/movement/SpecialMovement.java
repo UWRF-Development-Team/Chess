@@ -51,6 +51,7 @@ public class SpecialMovement extends Movement {
         this.setPawnForward();
         int rowDifference = Math.abs(start.getRow() - end.getRow());
         int rawRowDifference = start.getRow() - end.getRow();
+        // Pawns have to move forward
         if (!this.isForward(rawRowDifference)) {
             return false;
         }

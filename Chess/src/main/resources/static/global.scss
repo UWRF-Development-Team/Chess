@@ -1,30 +1,29 @@
 @import "functions";
 @import "mixin";
 @import "variables";
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
     background-color: $smoke;
     color: $cream;
     margin: 0;
-    font-family: serif;
+    font-family: 'Roboto Condensed';
+    @include flex(flex-start, center, column);
+    width: 100%;
 }
 
 .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     position: sticky;
+    @include flex(center, space-around, row);
     top: 0;
     background: $soft-pink;
     background-blend-mode: darken;
     background-size: cover;
     color: white;
-    padding: 10px 20px;
-    margin-top: 0;
-    margin-left: 0;
-    margin-bottom: 50px;
-    margin-right: 0;
+    padding: 10px;
     height: 50px;
+    width: 100%;
+
 
 }
 .nav-list {
@@ -78,31 +77,40 @@ a {
     text-decoration: none;
 }
 
-#board {
-    margin-left: 50px;
-    width: calc-size(55, 55, 3);
-    height: calc-size(55, 55, 3);
-    background-color: $white;
+#board-section {
+    height: 100%;
+    width: 100%;
     @include flex(center, center, column);
-    $quarter-percent: calc-size(0.25, 0.25, 0.25);
-    box-shadow: $lavender 0 0 calc($quarter-percent * 8);
-    .row {
-        width: 100%;
-        height: 100%;
-        border-bottom: 5px solid;
-        border-color: $gray;
-        @include flex(center, center, row);
-        &:last-child {
-            border: none;
-        }
-        .col {
+    #board {
+        width: calc-size(55, 55, 3);
+        height: calc-size(55, 55, 3);
+        background-color: $white;
+        @include flex(center, center, column);
+        $quarter-percent: calc-size(0.25, 0.25, 0.25);
+        box-shadow: $lavender 0 0 calc($quarter-percent * 8);
+
+        .row {
             width: 100%;
             height: 100%;
-            border-right: 5px solid;
+            border-bottom: 5px solid;
             border-color: $gray;
+            @include flex(center, center, row);
+
             &:last-child {
                 border: none;
             }
+
+            .col {
+                width: 100%;
+                height: 100%;
+                border-right: 5px solid;
+                border-color: $gray;
+
+                &:last-child {
+                    border: none;
+                }
+            }
         }
     }
+
 }

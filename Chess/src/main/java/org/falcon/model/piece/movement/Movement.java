@@ -3,6 +3,7 @@ package org.falcon.model.piece.movement;
 import lombok.Getter;
 import lombok.Setter;
 import org.falcon.model.board.BoardSpot;
+import org.falcon.model.piece.member.King;
 
 @Getter
 @Setter
@@ -25,7 +26,8 @@ public class Movement {
         return movementValue != 0;
     }
     public static boolean inRange(int changeValue, int range) {
-        return changeValue <= range;
+        //0 is not considered within range because a piece cannot move to where it already is.
+        return (changeValue <= range && changeValue != 0);
     }
     // Seeing if movement is valid
     public boolean isValidMovement(BoardSpot start, BoardSpot end) {
@@ -49,7 +51,7 @@ public class Movement {
             boolean moveIsStraight = isStraight(start, end);
             if (moveIsStraight) {
                 // Is within range left or right
-                if (isInfinite(this.horizontal) ||  colDifference <= this.horizontal) {
+                if (isInfinite(this.horizontal) ||  colDifference == this.horizontal) {
                     return true;
                     // Is in range up or down
                 } else if (isInfinite(this.forward) || inRange(rowDifference, this.forward) ||
@@ -72,11 +74,19 @@ public class Movement {
         // Diagonal always moves from one row to another and one column to another
         int rowDifference = Math.abs(start.getRow() - end.getRow());
         int colDifference = Math.abs(start.getCol() - end.getCol());
-        return rowDifference != 0 && colDifference != 0;
+        boolean equalRowCol = rowDifference == colDifference;
+        boolean isDiagonal = rowDifference != 0 && colDifference != 0 && equalRowCol;
+        System.out.println(isDiagonal);
+        return isDiagonal;
     }
     public static boolean isStraight(BoardSpot start, BoardSpot end) {
-        // Any move that is not diagonal is straight
-        return !isDiagonal(start, end);
+        int rowDifference = Math.abs(start.getRow() - end.getRow());
+        int colDifference = Math.abs(start.getCol() - end.getCol());
+
+        boolean rowHasChanged = rowDifference != 0;
+        boolean colHasChanged = colDifference != 0;
+
+        return rowHasChanged ^ colHasChanged;
     }
     /*
     Pawn: 1, 0, 0, 0
@@ -85,4 +95,8 @@ public class Movement {
     Queen: -1, -1, -1, -1
     Bishop: 0, 0, 0, -1
      */
+    public static void main(String[] args) {
+        King TestK = new King();
+        System.out.println(TestK.getMovement().isValidMovement(new BoardSpot(1,1),new BoardSpot(3,1)));
+    }
 }

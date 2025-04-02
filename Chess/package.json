@@ -9,6 +9,7 @@
   "author": "UWRF ACM Dev Team",
   "license": "ISC",
   "dependencies": {
+    "sass": "^1.86.1",
     "typescript": "^5.8.2"
   }
 }
