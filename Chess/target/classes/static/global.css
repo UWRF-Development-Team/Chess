@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+body {
+  background-color: #4a4a4a;
+  color: #FFEEE2;
+  margin: 0;
+  font-family: "Roboto Condensed";
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.navbar {
+  position: sticky;
+  display: flex;
+  justify-content: center;
+  align-items: space-around;
+  flex-direction: row;
+  top: 0;
+  background: #F58F8F;
+  background-blend-mode: darken;
+  background-size: cover;
+  color: white;
+  padding: 10px;
+  height: 50px;
+  width: 100%;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+}
+
+.nav-list li {
+  margin-right: 20px;
+}
+
+.nav-list li:last-child {
+  margin-right: 0;
+}
+
+.nav-list li a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-list li a:hover {
+  color: #912A91;
+}
+
+h1 {
+  font-size: calc((8vw + 8vh) / 2 + 1rem);
+}
+
+h2 {
+  font-size: calc((6vw + 6vh) / 2 + 1rem);
+}
+
+h3 {
+  font-size: calc((4.5vw + 4.5vh) / 2 + 1rem);
+}
+
+h4 {
+  font-size: calc((3.5vw + 3.5vh) / 2 + 1rem);
+}
+
+h5 {
+  font-size: calc((2.5vw + 2.5vh) / 2 + 1rem);
+}
+
+h6 {
+  font-size: calc((1.5vw + 1.5vh) / 2 + 1rem);
+}
+
+p {
+  font-size: calc((1.5vw + 1.5vh) / 2 + 1rem);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#board-section {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+#board-section #board {
+  width: calc((55vw + 55vh) / 2 + 3rem);
+  height: calc((55vw + 55vh) / 2 + 3rem);
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: #E4AFE7 0 0 calc(((0.25vw + 0.25vh) / 2 + 0.25rem) * 8);
+}
+#board-section #board .row {
+  width: 100%;
+  height: 100%;
+  border-bottom: 5px solid;
+  border-color: rgb(127.5, 127.5, 127.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+#board-section #board .row:last-child {
+  border: none;
+}
+#board-section #board .row .col {
+  width: 100%;
+  height: 100%;
+  border-right: 5px solid;
+  border-color: rgb(127.5, 127.5, 127.5);
+}
+#board-section #board .row .col:last-child {
+  border: none;
+}
+
+/*# sourceMappingURL=global.css.map */

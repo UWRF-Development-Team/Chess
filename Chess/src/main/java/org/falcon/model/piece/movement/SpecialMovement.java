@@ -57,11 +57,27 @@ public class SpecialMovement extends Movement {
         }
         int colDifference = Math.abs(start.getCol() - end.getCol());
         boolean isDiagonal = isDiagonal(start, end);
-        if (isDiagonal) {
+        if (isDiagonal && rowDifference == 1) {
+            /*
             List<BoardSpot> availableDiagonals = start.getDiagonalSpot();
             for (BoardSpot boardSpot : availableDiagonals) {
                 int diagonalRowDifference = start.getRow() - boardSpot.getRow();
+                if (diagonalRowDifference > 1){
+
+                }
             }
+
+             */
+            if(board.isSpotOccupied(end)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        boolean moveIsStraight = isStraight(start, end);
+        if (moveIsStraight && inRange(rowDifference, this.getForward()) && !board.isSpotOccupied(end)){
+            return true;
         }
         return false;
     }

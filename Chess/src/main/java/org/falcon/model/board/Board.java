@@ -70,6 +70,7 @@ public class Board {
         return board;
     }
 
+    // possible redundant method with isSpotOccupied?
     public boolean containsPiece(BoardSpot spot) {
         return this.board.get(spot.getRow() - 1).get(spot.getCol() - 1).isPresent();
     }

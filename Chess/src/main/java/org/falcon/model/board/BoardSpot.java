@@ -31,9 +31,9 @@ public class BoardSpot {
     public List<BoardSpot> getDiagonalSpot() {
         List<BoardSpot> pieceList = new ArrayList<>();
         Optional<BoardSpot> topLeftSpot = this.getTopLeftDiagonal();
-        Optional<BoardSpot> topRightSpot = this.getTopLeftDiagonal();
-        Optional<BoardSpot> bottomLeftSpot = this.getTopLeftDiagonal();
-        Optional<BoardSpot> bottomRightSpot = this.getTopLeftDiagonal();
+        Optional<BoardSpot> topRightSpot = this.getTopRightDiagonal();
+        Optional<BoardSpot> bottomLeftSpot = this.getBottomLeftDiagonal();
+        Optional<BoardSpot> bottomRightSpot = this.getBottomRightDiagonal();
 
         if(topLeftSpot.isPresent()) {
             pieceList.add(topLeftSpot.get());

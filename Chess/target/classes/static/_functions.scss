@@ -1,0 +1,4 @@
+@function calc-size($width, $height, $rem){
+    @return calc(((#{$width}vw + #{$height}vh) / 2) + #{$rem}rem);
+}
+
