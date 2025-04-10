@@ -17,6 +17,7 @@ public class Timer {
             wait(1000);
             this.time_remaining--;
         }
+        // local date time - local date time idea?
         System.out.println("times up!!!");
     }
 
