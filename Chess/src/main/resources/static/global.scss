@@ -109,6 +109,10 @@ a {
                 &:last-child {
                     border: none;
                 }
+                &:hover {
+                    background-color: $soft-pink !important;
+                }
+
             }
         }
     }
