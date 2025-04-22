@@ -124,5 +124,8 @@ a {
 #board-section #board .row .col:last-child {
   border: none;
 }
+#board-section #board .row .col:hover {
+  background-color: #F58F8F !important;
+}
 
 /*# sourceMappingURL=global.css.map */
