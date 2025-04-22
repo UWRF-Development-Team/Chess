@@ -43,6 +43,28 @@ Array.from(grid).forEach((row: any) => {
 let selectedRow: number = -1;
 let selectedCol: number = -1;
 
+const pieceImages: any = document.getElementsByClassName('piece-img');
+function printCoord(rowNum: number, colNum: number): void {
+    console.log(`${textToNumber(rowNum)}, ${textToNumber(colNum)}`);
+}
+
+let lastSavedCoord: [number, number] = [0, 0];
+
+function getCoord() {
+    const col: string = this.parentElement.classList[1];
+    const row: string = this.parentElement.parentElement.id;
+    console.log(row);
+    const splitRow: string = row.split("-");
+    const splitCol: string = col.split("-");
+    const rowNum: number = splitRow[1];
+    const colNum: number = splitCol[1];
+    printCoord(rowNum, colNum);
+}
+
+for (let image of pieceImages) {
+    image.addEventListener('mouseover', printCoord);
+}
+
 function textToNumber(text: string): number {
     switch (text) {
         case "one":
@@ -65,6 +87,8 @@ function textToNumber(text: string): number {
             throw new Error("Invalid Board Index");
     }
 }
+
+
 
 function mouseUp(this: any) {
     // this.backgroundColor = white;
