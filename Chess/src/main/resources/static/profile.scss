@@ -1,0 +1,43 @@
+@import "functions";
+@import "mixin";
+@import "variables";
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+//Not gaming
+body {
+    @include flex(flex-start, center, column);
+    #profile-section {
+        width: 90%;
+        @include flex(space-between, flex-start, row);
+        #right-user-div {
+            @include flex(center, center, column);
+            //width: 60%;
+            img {
+                width: calc-size(45, 45, 3);
+                height: auto;
+                max-width: 500px;
+                border-radius: 30px;
+                padding: 10px;
+            }
+        }
+        #left-bio-div {
+            @include flex(flex-start, flex-start, column);
+            height: 100%;
+
+
+        }
+    }
+}
+//width: 100%;
+//@include flex(flex-start, flex-start, row);
+//    #left-user-div{
+//        width: 100%;
+//        height: auto;
+//        max-width: 500px;
+//        border-radius: 30px;
+//        padding: 10px;
+//    }
+
+
+
+
+

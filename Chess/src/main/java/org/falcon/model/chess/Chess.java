@@ -34,12 +34,12 @@ public class Chess {
     }
     public void assignTurn (boolean whosTurn){
         if(whosTurn){
-            playerOne.setTurnStatus(true);
-            playerTwo.setTurnStatus(false);
+            playerOne.setTurn(true);
+            playerTwo.setTurn(false);
         }
         else{
-            playerOne.setTurnStatus(false);
-            playerTwo.setTurnStatus(true);
+            playerOne.setTurn(false);
+            playerTwo.setTurn(true);
         }
     }
 

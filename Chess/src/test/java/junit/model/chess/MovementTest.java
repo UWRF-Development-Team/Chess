@@ -29,7 +29,11 @@ public class MovementTest {
         assertFalse(TestB.getMovement().isValidMovement(new BoardSpot(1,1),new BoardSpot(2,1)));
         assertTrue(TestB.getMovement().isValidMovement(new BoardSpot(1,1),new BoardSpot(2,2)));
 
-        assertFalse(TestP.getMovement().isValidPawnMovement(new BoardSpot(1, 1), new BoardSpot(2, 2)));
+        /*
+        We probably need several tests to be sure pawn movement is working because of the several conditions involved,
+        For example, testing to make sure the pawn can move forward two if it hasn't moved but can't if it has
+        */
+        assertFalse(TestP.getMovement().isValidPawnMovement(new BoardSpot(2, 2), new BoardSpot(3, 3)));
         assertTrue(TestP.getMovement().isValidPawnMovement(new BoardSpot(6, 6), new BoardSpot(5, 6)));
 // possible error for isvalid movement method
         assertFalse(TestK.getMovement().isValidMovement(new BoardSpot(1,1),new BoardSpot(3,1)));

@@ -68,12 +68,9 @@ public class SpecialMovement extends Movement {
             }
 
              */
-            if(board.isSpotOccupied(end)){
-                return true;
-            }
-            else{
-                return false;
-            }
+
+            // Add a way to check if the occupied spot is an enemy piece
+            return board.isSpotOccupied(end);
         }
         boolean moveIsStraight = isStraight(start, end);
         if (moveIsStraight && inRange(rowDifference, this.getForward()) && !board.isSpotOccupied(end)){

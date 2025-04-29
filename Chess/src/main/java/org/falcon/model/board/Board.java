@@ -5,12 +5,14 @@ import lombok.Setter;
 import org.falcon.model.piece.*;
 import org.falcon.model.piece.member.*;
 import org.falcon.model.player.Player;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 
 @Getter
 @Setter
+@Component
 public class Board {
     private List<List<Optional<Piece>>> board;
     private List<Player> players;

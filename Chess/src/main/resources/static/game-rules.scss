@@ -1,0 +1,16 @@
+@import "functions";
+@import "mixin";
+@import "variables";
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+//gaming
+#rules-div {
+    @include flex(flex-start, center, column);
+    .pieces-rules-div {
+        width: 60%;
+        img {
+            width: calc-size(20, 20, 1);
+            height: auto;
+            max-width: 500px;
+        }
+    }
+}
