@@ -1,5 +1,6 @@
 package org.falcon.model.piece.member;
 
+import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 import org.falcon.model.board.Board;
@@ -11,6 +12,7 @@ import org.falcon.model.player.PlayerChar;
 
 @Getter
 @Setter
+@Entity
 public class Pawn extends Piece {
     private final SpecialMovement movement = new SpecialMovement(1, 0, 1, 1, this);
     private boolean firstMove;

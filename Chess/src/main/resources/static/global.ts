@@ -54,13 +54,13 @@ function getCoord() {
     const col: string = this.parentElement.classList[1];
     const row: string = this.parentElement.parentElement.id;
     console.log(row);
-    const splitRow: string = row.split("-");
-    const splitCol: string = col.split("-");
-    const rowNum: number = splitRow[1];
-    const colNum: number = splitCol[1];
+    const splitRow: string[] = row.split("-");
+    const splitCol: string[] = col.split("-");
+    const rowNum: number = Number(splitRow[1]);
+    const colNum: number = Number(splitCol[1]);
     printCoord(rowNum, colNum);
 }
-
+//GRRRRRRRR
 for (let image of pieceImages) {
     image.addEventListener('mouseover', printCoord);
 }

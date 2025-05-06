@@ -1,8 +1,12 @@
 package org.falcon.model.board;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.falcon.exception.PieceOutOfBoundsException;
+import org.falcon.model.Identifiable;
 import org.falcon.model.piece.PieceOrientation;
 
 import java.util.ArrayList;
@@ -11,10 +15,21 @@ import java.util.Optional;
 
 @Getter
 @Setter
-public class BoardSpot {
+@Entity
+@Table(name = "board_spots")
+public class BoardSpot extends Identifiable {
     // One indexed based.
+
+    @Column(name = "row")
     private int row;
+    @Column(name = "column")
     private int col;
+
+    public BoardSpot() {
+        this.row = 1;
+        this.col = 1;
+    }
+
     public BoardSpot(int row, int col) {
         this.row = row;
         this.col = col;

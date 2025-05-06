@@ -1,36 +1,55 @@
 package org.falcon.model.chess;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
-
+import org.falcon.model.Identifiable;
+import org.falcon.model.player.Player;
 
 
 @Getter
 @Setter
-public class Turn {
-    private int turnCount = 0;
-
+@Entity
+@Table(name = "turns")
+public class Turn extends Identifiable {
+    @Column(name = "turn_count")
+    private int turnCount = 1;
+    @Transient
+    private Player playerOne;
+    @Transient
+    private Player playerTwo;
     
-    public Turn () {
-
+    public Turn() {
+        this.playerOne = new Player();
+        this.playerTwo = new Player();
     }
 
-    public void makeTurn(){
-        this.turnCount ++;
+    public Turn(Player playerOne, Player playerTwo) {
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+    }
 
+    public Player getCurrentPlayer() {
+        if (turnCount % 2 != 0) {
+            return this.playerOne;
+        } else {
+            return this.playerTwo;
+        }
+    }
 
+    public void incrementTurn() {
+        this.turnCount++;
+    }
 
-//        if(turnCount % 2 == 0){
-//            whiteTurn = false;
-//        }
-//        else{
-//            whiteTurn = true;
-//        }
-//        return whiteTurn;
-
+    public Player takeTurn() {
+        this.incrementTurn();
+        return this.getCurrentPlayer();
     }
     
-    public void resetTurnCount (){
+    public void resetTurnCount(){
         this.turnCount = 0;
     }
 

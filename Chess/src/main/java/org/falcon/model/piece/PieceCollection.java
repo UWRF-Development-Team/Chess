@@ -1,7 +1,9 @@
 package org.falcon.model.piece;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.falcon.model.Identifiable;
 import org.falcon.model.piece.member.*;
 import org.falcon.model.player.Player;
 import org.falcon.model.player.PlayerChar;
@@ -11,18 +13,31 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PieceCollection {
+@Entity
+@Table(name = "piece_collections")
+public class PieceCollection extends Identifiable {
+    @Transient
     public static final PieceChar[][] BLACK_STARTING_PIECES = {
             {PieceChar.ROOK, PieceChar.HORSE, PieceChar.BISHOP, PieceChar.QUEEN, PieceChar.KING, PieceChar.BISHOP, PieceChar.HORSE, PieceChar.ROOK},
             {PieceChar.PAWN, PieceChar.PAWN,  PieceChar.PAWN,   PieceChar.PAWN,  PieceChar.PAWN, PieceChar.PAWN,   PieceChar.PAWN,  PieceChar.PAWN}
     };
+    @Transient
     public static final PieceChar[][] WHITE_STARTING_PIECES = {
             {PieceChar.PAWN, PieceChar.PAWN,  PieceChar.PAWN,   PieceChar.PAWN,  PieceChar.PAWN, PieceChar.PAWN,   PieceChar.PAWN,  PieceChar.PAWN},
             {PieceChar.ROOK, PieceChar.HORSE, PieceChar.BISHOP, PieceChar.KING,  PieceChar.QUEEN, PieceChar.BISHOP, PieceChar.HORSE, PieceChar.ROOK}
     };
+    @OneToOne
+    @JoinColumn(name = "player_id")
     private Player player;
+    @Transient
     private List<Piece> pieces;
     // Constructor
+
+    public PieceCollection() {
+        this.player = null;
+        this.pieces = new ArrayList<>();
+    }
+
     public PieceCollection(Player player) {
         this.player = player;
         this.pieces = this.getInitialPieces();
@@ -33,10 +48,9 @@ public class PieceCollection {
     }
 
     public PieceOrientation getPieceOrientation() {
-        if(this.player.getPlayerChar() == PlayerChar.WHITE) {
+        if (this.player.getPlayerChar() == PlayerChar.WHITE) {
            return PieceOrientation.BOTTOM;
-        }
-        else {
+        } else {
             return PieceOrientation.TOP;
         }
     }

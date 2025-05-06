@@ -1,7 +1,11 @@
 package org.falcon.model.board;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
+import org.falcon.model.Identifiable;
 import org.falcon.model.piece.*;
 import org.falcon.model.piece.member.*;
 import org.falcon.model.player.Player;
@@ -13,8 +17,12 @@ import java.util.*;
 @Getter
 @Setter
 @Component
-public class Board {
+@Entity
+@Table(name = "boards")
+public class Board extends Identifiable {
+    @Transient
     private List<List<Optional<Piece>>> board;
+    @Transient
     private List<Player> players;
     //-------------------------------Constructor------------------------------
     public Board() {
@@ -44,6 +52,21 @@ public class Board {
     public boolean isSpotOccupied(BoardSpot spot) {
         return this.board.get(spot.getRow() - 1).get(spot.getCol() - 1).isPresent();
     }
+
+    public boolean isSpotSamePlayer(BoardSpot boardSpot, Player player) {
+        Optional<Piece> pieceAtSpot = this.pieceAtSpot(boardSpot);
+        if (pieceAtSpot.isEmpty()) {
+            return false;
+        } else {
+            Piece piece = pieceAtSpot.get();
+            return piece.getPlayer().equals(player);
+        }
+    }
+
+    public Optional<Piece> pieceAtSpot(BoardSpot boardSpot) {
+        return this.board.get(boardSpot.getRow() - 1).get(boardSpot.getCol() - 1);
+    }
+
     public void initializePlayerPiecesToBoard() {
         for (Player player : this.players) {
             for (Piece piece : player.getPieceCollection().getPieces()) {

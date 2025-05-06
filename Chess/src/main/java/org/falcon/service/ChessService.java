@@ -7,6 +7,8 @@ import org.falcon.repository.ChessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ChessService {
     private ChessRepository chessRepository;
@@ -16,6 +18,10 @@ public class ChessService {
                         BoardService boardService) {
         this.chessRepository = chessRepository;
         this.boardService = boardService;
+    }
+
+    public Optional<Chess> getById(Long id) {
+        return this.chessRepository.findById(id);
     }
 
     public Chess getByUsernames(String playerOneUsername, String playerTwoUsername) {

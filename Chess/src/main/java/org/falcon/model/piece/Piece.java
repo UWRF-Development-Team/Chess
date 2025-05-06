@@ -1,7 +1,9 @@
 package org.falcon.model.piece;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.falcon.model.Identifiable;
 import org.falcon.model.board.BoardSpot;
 import org.falcon.model.piece.movement.Movement;
 import org.falcon.model.player.Player;
@@ -10,8 +12,13 @@ import java.util.List;
 
 @Getter
 @Setter
-public abstract class Piece {
+@Entity
+@Table(name = "pieces")
+public abstract class Piece extends Identifiable {
+    @Transient
     private final Movement movement = new Movement(0, 0, 0, 0);
+    @ManyToOne
+    @JoinColumn(name = "player_id")
     protected Player player;
 
     // Constructors

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.falcon.model.board.BoardSpot;
 import org.falcon.model.piece.member.King;
+import org.falcon.model.player.Move;
 
 @Getter
 @Setter
@@ -29,6 +30,11 @@ public class Movement {
         //0 is not considered within range because a piece cannot move to where it already is.
         return (changeValue <= range && changeValue != 0);
     }
+
+    public boolean isValidMovement(Move move) {
+        return this.isValidMovement(move.getFrom(), move.getTo());
+    }
+
     // Seeing if movement is valid
     public boolean isValidMovement(BoardSpot start, BoardSpot end) {
         int rowDifference = Math.abs(start.getRow() - end.getRow());

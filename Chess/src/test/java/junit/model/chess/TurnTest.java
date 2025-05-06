@@ -17,7 +17,7 @@ public class TurnTest {
 
     @Test
     public void testCurrentTurn() {
-        testTurn.makeTurn();
+        testTurn.incrementTurn();
         assertTrue(testTurn.CheckIfWhiteTurn());
     }
 }

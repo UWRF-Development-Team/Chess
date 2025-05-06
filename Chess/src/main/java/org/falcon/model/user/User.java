@@ -12,14 +12,21 @@ import java.util.ArrayList;
 @Entity
 @Getter
 @Setter
+@Table(name = "users")
 public class User extends Identifiable {
+    @Column(name = "username")
     private String username;
+    @Column(name = "password")
     private String password;
+    @Column(name = "bio")
     private String bio;
     @Transient
     private Chess currentGame;
     private List<Chess> gameHistory;
+    @Column(name = "elo_rating")
     private int eloRating;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "skill_level")
     private SkillLevel skillLevel;
     public User() {
         this.username = "";

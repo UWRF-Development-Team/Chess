@@ -1,18 +1,30 @@
 package org.falcon.model.chess;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
+import org.falcon.model.Identifiable;
 import org.falcon.model.board.Board;
+import org.falcon.model.piece.Piece;
+import org.falcon.model.player.Move;
 import org.falcon.model.player.Player;
 import org.falcon.model.player.PlayerChar;
+
+import java.util.Optional;
 
 //"controller" to collectively use other classes and perform actions
 @Getter
 @Setter
-public class Chess {
+@Entity
+@Table(name = "chess_games")
+public class Chess extends Identifiable {
     // 2 Players
     private Board board;
+    @Transient
     private Player playerOne;
+    @Transient
     private Player playerTwo;
     private Turn currentTurn;
     public Chess() {
@@ -23,28 +35,26 @@ public class Chess {
 
     }
 
+    public boolean validMove(Move move) {
+        Player currentPlayer = this.currentTurn.getCurrentPlayer();
+        if (this.board.isSpotSamePlayer(move.getTo(), currentPlayer)) {
+            return false;
+        }
+        Optional<Piece> pieceAtSpot = this.getBoard().pieceAtSpot(move.getFrom());
+        if (pieceAtSpot.isEmpty()) {
+            return false;
+        }
+        Piece piece = pieceAtSpot.get();
+        return piece.getMovement().isValidMovement(move);
+    }
+
     // making a turn and checking whose turn it is
+
+
+
     public void updateTurn(){
-        currentTurn.makeTurn();
+        this.currentTurn.incrementTurn();
     }
-    public boolean isWhiteTurn(){
-        //This method sees if it is the white pieces turn
-        //if not, it is implied that it is the black pieces turn
-        return(currentTurn.CheckIfWhiteTurn());
-    }
-    public void assignTurn (boolean whosTurn){
-        if(whosTurn){
-            playerOne.setTurn(true);
-            playerTwo.setTurn(false);
-        }
-        else{
-            playerOne.setTurn(false);
-            playerTwo.setTurn(true);
-        }
-    }
-
-
-
 
 /*
 //    public void playGame() {
